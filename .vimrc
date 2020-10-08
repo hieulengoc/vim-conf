@@ -37,7 +37,7 @@ Plug 'scrooloose/nerdtree'
 " Plug 'tpope/vim-cucumber'
 " Plug 'tpope/vim-dispatch'
 " Plug 'tpope/vim-endwise'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-pastie'
 " Plug 'tpope/vim-ragtag'
 " Plug 'tpope/vim-rails'
@@ -54,11 +54,17 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/nerdcommenter'
 Plug 'frazrepo/vim-rainbow'
-Plug 'misterbuckley/vim-definitive'
+" Plug 'misterbuckley/vim-definitive'
 Plug 'tpope/vim-surround'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'dense-analysis/ale'
 Plug 'joshdick/onedark.vim'
+" Plug 'yuttie/comfortable-motion.vim'
+Plug 'ryanoasis/vim-devicons'
+" Plug 'pechorin/any-jump.vim'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'wincent/Command-T'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 
@@ -202,3 +208,4 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 colorscheme onedark
+set mouse-=a
