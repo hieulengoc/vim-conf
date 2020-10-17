@@ -61,10 +61,13 @@ Plug 'dense-analysis/ale'
 Plug 'joshdick/onedark.vim'
 " Plug 'yuttie/comfortable-motion.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'pechorin/any-jump.vim'
+Plug 'pechorin/any-jump.vim'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'wincent/Command-T'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'preservim/tagbar'
 call plug#end()
 
 
@@ -108,19 +111,18 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-noremap <leader>l :Align
+nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>s :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>f :CtrlP<CR>
+nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
+nnoremap <leader>d :TagbarToggle<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-nnoremap <Leader>d :FindDefinition<CR> " Normal mode
-vnoremap <Leader>d "ay:FindDefinition <C-R>a<CR> " Visual mode
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
@@ -153,6 +155,11 @@ let g:airline_powerline_fonts = 1
 let g:rainbow_active = 1
 
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+let g:easytags_file = './.git/tags'
+let g:easytags_opts = ['--tag-relative=yes', '-R', '-f ./.git/tags']
+let g:easytags_cmd = '/usr/local/bin/ctags'
+let g:easytags_dynamic_files = 1
+let g:easytags_always_enabled = 1
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -209,3 +216,4 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 colorscheme onedark
 set mouse-=a
+set tags=./.git/tags;
