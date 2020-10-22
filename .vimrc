@@ -115,12 +115,12 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+nmap <F4> <Plug>VimspectorStop
 nmap <F5> <Plug>VimspectorContinue
-nmap <F9> <Plug>VimspectorToggleBreakpoint
 nmap <F6> <Plug>VimspectorStepOver
 nmap <F7> <Plug>VimspectorStepInto
 nmap <F8> <Plug>VimspectorStepOut
-nmap <F4> <Plug>VimspectorStop
+nmap <F9> <Plug>VimspectorToggleBreakpoint
 nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -146,6 +146,12 @@ function JavaStartDebug()
 endfunction
 
 nmap <F1> :call JavaStartDebug()<CR>
+
+function GolangStartDebug()
+  call vimspector#LaunchWithSettings({ "configuration": "golang" })
+endfunction
+
+nmap <F2> :call GolangStartDebug()<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
