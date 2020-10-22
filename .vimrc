@@ -10,6 +10,8 @@ filetype off
 
 let g:ale_disable_lsp = 1
 
+" let g:vimspector_enable_mappings = 'HUMAN'
+
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
@@ -68,6 +70,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'preservim/tagbar'
+Plug 'puremourning/vimspector'
+Plug 'udalov/kotlin-vim'
 call plug#end()
 
 
@@ -111,6 +115,12 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+nmap <F5> <Plug>VimspectorContinue
+nmap <F9> <Plug>VimspectorToggleBreakpoint
+nmap <F6> <Plug>VimspectorStepOver
+nmap <F7> <Plug>VimspectorStepInto
+nmap <F8> <Plug>VimspectorStepOut
+nmap <F4> <Plug>VimspectorStop
 nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>a :Ag<space>
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -122,7 +132,20 @@ nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>d :TagbarToggle<CR>
+nnoremap <leader>h :VimspectorReset<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" nmap <F1> :CocCommand java.debug.vimspector.start<CR>
+function! JavaStartDebugCallback(err, port)
+  execute "cexpr! 'Java debug started on port: " . a:port . "'"
+  call vimspector#LaunchWithSettings({ "configuration": "Java Attach", "AdapterPort": a:port })
+endfunction
+
+function JavaStartDebug()
+  call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
+endfunction
+
+nmap <F1> :call JavaStartDebug()<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
@@ -155,11 +178,14 @@ let g:airline_powerline_fonts = 1
 let g:rainbow_active = 1
 
 let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
-let g:easytags_file = './.git/tags'
-let g:easytags_opts = ['--tag-relative=yes', '-R', '-f ./.git/tags']
+let g:easytags_file = './tags'
+let g:easytags_opts = ['--tag-relative=yes', '-R', '-f ./tags', '--fields=+l']
 let g:easytags_cmd = '/usr/local/bin/ctags'
 let g:easytags_dynamic_files = 1
 let g:easytags_always_enabled = 1
+let g:easytags_auto_update = 0
+" let g:easytags_auto_highlight = 1
+
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -216,4 +242,4 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 colorscheme onedark
 set mouse-=a
-set tags=./.git/tags;
+set tags=./tags;
