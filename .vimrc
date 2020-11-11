@@ -122,7 +122,7 @@ nmap <F7> <Plug>VimspectorStepInto
 nmap <F8> <Plug>VimspectorStepOut
 nmap <F9> <Plug>VimspectorToggleBreakpoint
 nnoremap <leader>l :NERDTreeFind<CR>
-nnoremap <leader>a :Ag<space>
+nnoremap <leader>a :Ag!<space>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>s :NERDTreeToggle<CR>
 nnoremap <leader>f :CtrlP<CR>
@@ -191,6 +191,8 @@ let g:easytags_dynamic_files = 1
 let g:easytags_always_enabled = 1
 let g:easytags_auto_update = 0
 " let g:easytags_auto_highlight = 1
+let g:ackprg = 'ag --vimgrep'
+
 
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
