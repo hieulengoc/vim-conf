@@ -172,6 +172,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
+let NERDTreeShowHidden=1
 let g:gitgutter_enabled = 1
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '✹'
