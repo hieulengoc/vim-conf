@@ -72,6 +72,7 @@ Plug 'xolox/vim-misc'
 Plug 'preservim/tagbar'
 Plug 'puremourning/vimspector'
 Plug 'udalov/kotlin-vim'
+Plug 'buoto/gotests-vim'
 call plug#end()
 
 
@@ -115,24 +116,30 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+nmap <F1> :call JavaStartDebug()<CR>
+nmap <F2> :call GolangStartDebug()<CR>
 nmap <F4> <Plug>VimspectorStop
 nmap <F5> <Plug>VimspectorContinue
 nmap <F6> <Plug>VimspectorStepOver
 nmap <F7> <Plug>VimspectorStepInto
 nmap <F8> <Plug>VimspectorStepOut
 nmap <F9> <Plug>VimspectorToggleBreakpoint
-nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>a :Ag!<space>
 nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>s :NERDTreeToggle<CR>
+" nnoremap <leader>d :TagbarToggle<CR>
+nnoremap <leader>d :GoDocBrowser<CR>
 nnoremap <leader>f :CtrlP<CR>
+nnoremap <leader>g :GitGutterToggle<CR>
+nnoremap <leader>h :VimspectorReset<CR>
+nnoremap <leader>i :GoMetaLinter<CR>
+nnoremap <leader>l :NERDTreeFind<CR>
+nnoremap <leader>o :GoCoverage<CR>
+nnoremap <leader>r :GoRename<CR>
+nnoremap <leader>s :NERDTreeToggle<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
-nnoremap <leader>d :TagbarToggle<CR>
-nnoremap <leader>h :VimspectorReset<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " nmap <F1> :CocCommand java.debug.vimspector.start<CR>
@@ -145,13 +152,9 @@ function JavaStartDebug()
   call CocActionAsync('runCommand', 'vscode.java.startDebugSession', function('JavaStartDebugCallback'))
 endfunction
 
-nmap <F1> :call JavaStartDebug()<CR>
-
 function GolangStartDebug()
   call vimspector#LaunchWithSettings({ "configuration": "golang" })
 endfunction
-
-nmap <F2> :call GolangStartDebug()<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
@@ -194,8 +197,12 @@ let g:easytags_auto_update = 0
 " let g:easytags_auto_highlight = 1
 let g:ackprg = 'ag --vimgrep'
 
-
-
+" For COC autocomplete
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
