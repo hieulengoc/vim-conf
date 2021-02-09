@@ -137,6 +137,7 @@ nnoremap <leader>h :VimspectorReset<CR>
 nnoremap <leader>i :GoMetaLinter<CR>
 nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>o :GoCoverage<CR>
+nnoremap <leader>p :GoTest<CR>
 nnoremap <leader>r :GoRename<CR>
 nnoremap <leader>s :NERDTreeToggle<CR>
 nnoremap <leader>t :CtrlPTag<CR>
