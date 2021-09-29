@@ -1,10 +1,17 @@
 # Some steps for setting up new macbook:
 
 1. After copying dot files:
-- brew install --HEAD universal-ctags/universal-ctags/universal-ctags go zsh
+- brew install --HEAD universal-ctags/universal-ctags/universal-ctags go zsh fzf ripgrep
 2. Start vim and:
 - PlugInstall
 - GoInstallBinaries
+Add this to [.zshrc](https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko):
+```
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+  ```
 3. To map the tilda key correctly, choose the US keyboard instead of US International PC (for German layout keyboard)
 4. Create a remap key [script](https://stackoverflow.com/questions/6442364/running-script-upon-login-mac): `cat remap_keys.sh`
 ```

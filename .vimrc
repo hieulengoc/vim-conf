@@ -70,9 +70,11 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'preservim/tagbar'
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 Plug 'udalov/kotlin-vim'
 Plug 'buoto/gotests-vim'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 
 
@@ -139,7 +141,7 @@ nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>o :GoCoverage<CR>
 nnoremap <leader>p :GoTest<CR>
 nnoremap <leader>r :GoRename<CR>
-nnoremap <leader>s :NERDTreeToggle<CR>
+nnoremap <leader>s :Rg<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>u :GoTests<CR>
