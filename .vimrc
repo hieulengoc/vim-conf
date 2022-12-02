@@ -75,6 +75,8 @@ Plug 'udalov/kotlin-vim'
 Plug 'buoto/gotests-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'hashivim/vim-terraform'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 
@@ -101,6 +103,7 @@ set shiftwidth=2                                             " normal mode inden
 set showcmd
 set smartcase                                                " case-sensitive search if any caps
 set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
+set statusline^=%{coc#status()}
 set tabstop=8                                                " actual tabs occupy 8 characters
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu                                                 " show a navigable menu for tab completion
@@ -148,6 +151,9 @@ nnoremap <leader>u :GoTests<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+" nmap <C-s> <Plug>MarkdownPreview
+" nmap <M-s> <Plug>MarkdownPreviewStop
+nnoremap <leader>m <Plug>MarkdownPreviewToggle
 
 " nmap <F1> :CocCommand java.debug.vimspector.start<CR>
 function! JavaStartDebugCallback(err, port)
@@ -183,6 +189,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 let NERDTreeShowHidden=1
+let NERDTreeWinSize=50
 let g:gitgutter_enabled = 1
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '✹'
@@ -203,6 +210,7 @@ let g:easytags_always_enabled = 1
 let g:easytags_auto_update = 0
 " let g:easytags_auto_highlight = 1
 let g:ackprg = 'ag --vimgrep'
+
 
 " For COC autocomplete
 if has('nvim')
