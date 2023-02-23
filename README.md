@@ -2,9 +2,15 @@
 
 1. After copying dot files:
 - brew install --HEAD universal-ctags/universal-ctags/universal-ctags go zsh fzf ripgrep
-2. Start vim and:
+2. Download Plug:
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+3. Start vim and:
 - PlugInstall
 - GoInstallBinaries
+
 Add this to [.zshrc](https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko):
 ```
 if type rg &> /dev/null; then
